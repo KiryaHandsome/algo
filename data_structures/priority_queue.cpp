@@ -3,13 +3,15 @@
 #include <iostream>
 #include <queue>
 
-template<class T>
+template<class T, class Container = std::vector<T>>
 class priority_queue
 {
     using const_reference = const T&;
 private:
-    std::vector<T> v;
+    Container v;
 public:
+    priority_queue() { }
+
     const_reference top() const {
         if (v.size() == 0) {
             throw std::out_of_range("queue is empty");
@@ -28,7 +30,13 @@ public:
     }
 
     void push(const T& value) {
-        v.push_back(value);
+        emplace(value);
+    }
+
+    template<class ...Args>
+    void emplace(Args&&... args)
+    {
+        v.emplace_back(std::forward<Args>(args)...);
         size_t i = v.size() - 1;
         size_t par = parent(i);
         while (i > 0 && v[i] > v[par]) {
@@ -39,6 +47,8 @@ public:
     }
 
     size_t size() const { return v.size(); }
+
+    bool empty() const noexcept { return v.size() == 0; }
 
 private:
     void max_heapify(size_t idx)
@@ -61,22 +71,28 @@ private:
 
     size_t parent(size_t i) const { return (i - 1) >> 1; }
 
-    size_t left(size_t i) const { return i << 1 + 1; }
+    size_t left(size_t i) const { return (i << 1) + 1; }
 
-    size_t right(size_t i) const { return i << 1 + 2; }
+    size_t right(size_t i) const { return (i << 1) + 2; }
 
 };
 
 int main()
 {
-    //std::priority_queue<int> queue;
+    std::priority_queue<int> queue;
     priority_queue<int> p;
     for (int i = 0; i < 100; i++) {
         p.push(rand());
+        queue.push(rand());
     }
 
     for (int i = 0; i < 100; i++) {
         std::cout << p.top() << " ";
         p.pop();
+    }
+    std::cout << "*****************************\n";
+    for (int i = 0; i < 100; i++) {
+        std::cout << queue.top() << " ";
+        queue.pop();
     }
 }

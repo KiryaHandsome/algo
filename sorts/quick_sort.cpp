@@ -7,8 +7,6 @@ void quicksort(std::vector<int>& v, int l, int r);
 
 int partition(std::vector<int>& v, int l, int r);
 
-
-
 void quicksort(std::vector<int>& v)
 {
     quicksort(v, 0, (int)v.size() - 1);
@@ -61,6 +59,7 @@ void quicksort2(std::vector<int>& array, int low, int high)
     if (i < high)
         quicksort(array, i, high);
 }
+
 
 int main()
 {
