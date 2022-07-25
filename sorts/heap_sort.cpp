@@ -53,7 +53,9 @@ int main()
 }
 
 //****statistics for 10^7 elements****//
-// std::sort      - 2,546 sec.
-// heapsort       - 6,378 sec.
+// std::sort      - 2,546  sec.
+// heapsort       - 6,378  sec.
 // insertion sort - infinity
 // mergesort      - 15,253 sec
+// quicksort      - 13,551 sec
+// quicksort2     - 1,649  sec
