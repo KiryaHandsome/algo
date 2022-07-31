@@ -76,23 +76,3 @@ private:
     size_t right(size_t i) const { return (i << 1) + 2; }
 
 };
-
-int main()
-{
-    std::priority_queue<int> queue;
-    priority_queue<int> p;
-    for (int i = 0; i < 100; i++) {
-        p.push(rand());
-        queue.push(rand());
-    }
-
-    for (int i = 0; i < 100; i++) {
-        std::cout << p.top() << " ";
-        p.pop();
-    }
-    std::cout << "*****************************\n";
-    for (int i = 0; i < 100; i++) {
-        std::cout << queue.top() << " ";
-        queue.pop();
-    }
-}
